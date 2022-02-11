@@ -22,7 +22,7 @@
                             <td>{{$category->name}}</td>
                             <td>{{$category->description}}</td>
                             <td>{{$category->created_at}}</td>
-                            <td>edit</td>
+                            <td><a href="/categories/edit/{{$category->id}}" target="blank" title="edit category">Edit</a></td>
                         </tr>
                         @endforeach
                     </tbody>

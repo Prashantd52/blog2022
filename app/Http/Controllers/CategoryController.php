@@ -65,9 +65,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category, $id)
     {
-        //
+        //$category=Category::find($id);
+        $category=Category::where('id',$id)->first();
+         //dd($category);
+        return view('Category.category_edit',Compact('category'));
     }
 
     /**
@@ -80,6 +83,13 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $category=Category::where('id',$request->id)->first();
+        $category->name=$request->name;
+        $category->description=$request->description;
+
+        $category->save();
+
+        return redirect('/categories/index');
     }
 
     /**
