@@ -22,7 +22,17 @@
                             <td>{{$category->name}}</td>
                             <td>{{$category->description}}</td>
                             <td>{{$category->created_at}}</td>
-                            <td><a href="/categories/edit/{{$category->id}}" target="blank" title="edit category">Edit</a></td>
+                            <td>
+                                <div class="row ml-1">
+                                    <a class="btn btn-primary" href="/categories/edit/{{$category->id}}" target="blank" title="edit category">Edit</a>&emsp;
+                                    <form action="/categories/delete/{{$category->id}}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger" title="Delete category">Delete</button>&emsp;
+                                    </form>
+                                    <a class="btn btn-info" href="/categories/show/{{$category->id}}" target="blank" title="view category" >View</a>&emsp;
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -54,9 +54,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Category $category,$id)
     {
         //
+        $category=Category::where('id',$id)->first();
+
+        return view('Category.category_show',compact('category'));
     }
 
     /**
@@ -98,8 +101,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category,$id)
     {
         //
+        $category=Category::find($id);
+        $category->delete();
+
+        return "Category Deleted Successfully!";
     }
 }

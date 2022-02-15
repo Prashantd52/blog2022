@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a  class="col-md-2 btn btn-info" href="/categories/index" target="blank" title="all categories">Caregory Index</a>
+                    <a  class="col-md-3 btn btn-info" href="/categories/index" target="blank" title="all categories">Category Index</a>
                     <a  class="col-md-3 btn btn-primary" href="/categories/create" target="blank" title="create blog">Create Category</a>
                     <br>
                     You are logged in!
