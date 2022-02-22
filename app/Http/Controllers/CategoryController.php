@@ -44,7 +44,8 @@ class CategoryController extends Controller
         $category->description=$request->description;
         $category->save();
         
-        return "Category created succesfully";
+        session()->flash('success','Category created succesfully');
+        return redirect('/categories/index');
         //dd($category);
     }
 
@@ -106,7 +107,7 @@ class CategoryController extends Controller
         //
         $category=Category::find($id);
         $category->delete();
-
-        return "Category Deleted Successfully!";
+        session()->flash('danger','Category Deleted Successfully!');
+        return redirect('categories/index');
     }
 }

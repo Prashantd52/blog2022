@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h3>Category List</h3>
+    <h3>Category List<span><a href="/categories/create" target="_blank" title="create category">+</a></span></h3>
     <div class="card">
         <div class="card-body">
             <div class="table table-bordered ">

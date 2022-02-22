@@ -15,6 +15,8 @@ class TagController extends Controller
     public function index()
     {
         //
+        $tags=Tag::all();
+        return view('Tag.tag_index',compact('tags'));
     }
 
     /**
@@ -54,9 +56,10 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show(Tag $tag,$id)
     {
-        //
+        $tag=Tag::find($id);
+        return view('Tag.tag_show',Compact('tag'));
     }
 
     /**
@@ -65,9 +68,10 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit(Tag $tag,$id)
     {
-        //
+        $tag=Tag::where('id',$id)->first();
+        return view('Tag.tag_edit',compact('tag'));
     }
 
     /**
@@ -77,9 +81,15 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, Tag $tag,$id)
     {
         //
+        $tag=Tag::where('id',$id)->first();
+        $tag->name=$request->name;
+        $tag->description=$request->description;
+
+        $tag->save();
+        return redirect('tags/index');
     }
 
     /**
@@ -88,8 +98,13 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy(Tag $tag,$id)
     {
         //
+        $tag=Tag::where('id',$id)->first();
+
+        $tag->delete();
+
+        return redirect()->back();
     }
 }

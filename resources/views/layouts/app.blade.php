@@ -22,6 +22,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <body>
+    @if(session('success'))
+        <div class="alert alert-success justify-content-center">{{session('success')}}</div>
+    @endif
+    @if(session('danger'))
+        <div class="alert alert-danger justify-content-center">{{session('danger')}}</div>
+    @endif
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

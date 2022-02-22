@@ -29,3 +29,8 @@ Route::get('/categories/show/{id}','CategoryController@show');
 //tag routes
 Route::get('tags/create','TagController@create');
 Route::post('/tags/store','TagController@store');
+Route::get('tags/index','TagController@index');
+Route::get('tags/edit/{id}','TagController@edit');
+Route::put('tags/update/{id}','TagController@update');
+Route::get('tags/delete/{id}','TagController@destroy');
+Route::get('tags/show/{id}','TagController@show');
