@@ -17,14 +17,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function(){
 
-Route::get('/categories/create','CategoryController@create');
-Route::post('/categories_store','CategoryController@store');
+    Route::get('/categories/create','CategoryController@create');
+    Route::post('/categories_store','CategoryController@store');
+    Route::get('/categories/edit/{id}','CategoryController@edit');
+    Route::put('/categories/update','CategoryController@update');
+    Route::delete('/categories/delete/{id}','CategoryController@destroy');
+    Route::get('/categories/show/{id}','CategoryController@show');
+});
 Route::get('/categories/index','CategoryController@index');
-Route::get('/categories/edit/{id}','CategoryController@edit');
-Route::put('/categories/update','CategoryController@update');
-Route::delete('/categories/delete/{id}','CategoryController@destroy');
-Route::get('/categories/show/{id}','CategoryController@show');
 
 //tag routes
 Route::get('tags/create','TagController@create');

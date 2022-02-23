@@ -12,10 +12,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $categories=Category::all();
+        $search=$request->searchCN?$request->searchCN:'';
+        //dd($search);
+        $categories=Category::get();
         //dd($categories);
         return view('Category.category_index')->withCategories($categories);
     }
@@ -39,6 +40,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+        $request->validate([
+            'name'=>'required|unique:categories,name',
+            'description'=>'required',
+        ]);
+
         $category= new Category;
         $category->name=$request->name;
         $category->description=$request->description;
