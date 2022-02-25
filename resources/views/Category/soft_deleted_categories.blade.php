@@ -1,16 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h3>Category List<span><a href="/categories/create" target="_blank" title="create category">+</a></span></h3>
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-md-4">
-            <form class="pt-1" action="" method="get">
-                    <input type="text" placeholder="search Category" name="searchCN" value="">&nbsp;
-                    <button type="submit" class="btn btn-outline-info">Go</button>
-            </form>
-        </div>
-    </div>
+    <h3>Category List<span> / Soft Deleted</span></h3>
+    
     <div class="card">
         <div class="card-body">
             <div class="table ">
@@ -33,8 +25,8 @@
                             <td>{{$category->created_at}}</td>
                             <td>
                                 <div class="row ml-1">
-                                    @if(Auth::user())
-                                    <a class="btn btn-primary" href="/categories/edit/{{$category->id}}" target="blank" title="edit category">Edit</a>&emsp;
+                                    @if(Auth::user())     
+                                    <a href="/categories/restore/{{$category->id}}" class="btn btn-warning" >restore</a>&emsp;
                                     <form action="/categories/delete/{{$category->id}}" method="post">
                                         @csrf
                                         @method('delete')
@@ -50,7 +42,6 @@
                 </table>
             </div>
         </div>
-        <a href="/categories/shoft_deleted" target="_blank">view deleted categories</a>
     </div>
 <div>
 @endsection

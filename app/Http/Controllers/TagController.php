@@ -39,15 +39,19 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        //dd($_REQUEST);
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+        ]);
+
         $tag=new Tag;
         $tag->name=$request->name;
         $tag->description=$request->description;
 
         $tag->save();
 
-        return "Tags created successfull";
+        session()->flash('success','Tags created successfull');
+        return redirect('tags/index');
     }
 
     /**
@@ -84,11 +88,20 @@ class TagController extends Controller
     public function update(Request $request, Tag $tag,$id)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+        ]);
+        
         $tag=Tag::where('id',$id)->first();
         $tag->name=$request->name;
         $tag->description=$request->description;
 
         $tag->save();
+
+        //$tag=Tag::where('id',$id)->update(['name'=>$request->name,'description'=>$request->description]);
+
+        session()->flash('success','Tag updated Succesfully!');
         return redirect('tags/index');
     }
 
@@ -105,6 +118,7 @@ class TagController extends Controller
 
         $tag->delete();
 
+        session()->flash('danger','Tag deleted succesfully');
         return redirect()->back();
     }
 }

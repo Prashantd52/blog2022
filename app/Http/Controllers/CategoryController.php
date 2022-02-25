@@ -93,6 +93,10 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $request->validate([
+            'name'=>'required|unique:categories,name,' .$request->id,
+            'description'=>'required',
+        ]);
         $category=Category::where('id',$request->id)->first();
         $category->name=$request->name;
         $category->description=$request->description;
@@ -113,7 +117,25 @@ class CategoryController extends Controller
         //
         $category=Category::find($id);
         $category->delete();
+
         session()->flash('danger','Category Deleted Successfully!');
         return redirect('categories/index');
+    }
+
+    public function soft_deleted_categories()
+    {
+        $categories=Category::onlyTrashed()->get();
+
+        return view('Category.soft_deleted_categories',compact('categories'));
+    }
+
+    public function restore_category($id)
+    {
+        $category=Category::withTrashed()->find($id);
+        $category->restore();
+
+        session()->flash('warning','Category Restored');
+        return redirect('categories/index');
+
     }
 }

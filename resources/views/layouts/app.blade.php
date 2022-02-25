@@ -23,10 +23,13 @@
 </head>
 <body>
     @if(session('success'))
-        <div class="alert alert-success justify-content-center">{{session('success')}}</div>
+        <div class="alert alert-success text-center">{{session('success')}}</div>
     @endif
     @if(session('danger'))
-        <div class="alert alert-danger justify-content-center">{{session('danger')}}</div>
+        <div class="alert alert-danger text-center">{{session('danger')}}</div>
+    @endif
+    @if(session('warning'))
+        <div class="alert alert-warning text-center">{{session('warning')}}</div>
     @endif
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">

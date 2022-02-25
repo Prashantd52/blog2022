@@ -25,6 +25,8 @@ Route::middleware(['auth'])->group(function(){
     Route::put('/categories/update','CategoryController@update');
     Route::delete('/categories/delete/{id}','CategoryController@destroy');
     Route::get('/categories/show/{id}','CategoryController@show');
+    Route::get('/categories/shoft_deleted','CategoryController@soft_deleted_categories');
+    Route::get('/categories/restore/{id}','CategoryController@restore_category');
 });
 Route::get('/categories/index','CategoryController@index');
 

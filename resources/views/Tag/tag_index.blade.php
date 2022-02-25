@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h3>Tag List<span><a  class="col-md-2 btn btn-primary" href="/tags/create" target="blank" title="create tag">+</a></span></h3>
+    <h3>Tag List<span><a href="/tags/create" target="_blank" title="create tag">+</a></span></h3>
     <div class="card">
         <div class="card-body">
-            <div class="table table-bordered ">
-                <table class="table">
+            <div class="table ">
+                <table class="table table-bordered ">
                     <thead>
                         <tr>
                             <th>Id</th>
