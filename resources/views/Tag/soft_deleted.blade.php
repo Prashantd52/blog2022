@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h3>Tag List<span><a href="/tags/create" target="_blank" title="create tag">+</a></span></h3>
+    <h3>Shoft deleted Tag<span></h3>
     <div class="card">
         <div class="card-body">
             <div class="table ">
@@ -24,7 +24,7 @@
                             <td>{{$tag->created_at}}</td>
                             <td>
                                 <div class="row ml-1">
-                                    <a class="btn btn-primary" href="/tags/edit/{{$tag->id}}" target="blank" title="edit tag">Edit</a>&emsp;
+                                    <a class="btn btn-warning" href="/tags/restore/{{$tag->id}}"  title="restore tag">Restore</a>&emsp;
                                     <a class="btn btn-danger" href="/tags/delete/{{$tag->id}}" title="Delete tag">Delete</a>&emsp;
                                     <a class="btn btn-info" href="/tags/show/{{$tag->id}}" target="blank" title="view tag" >View</a>&emsp;
                                 </div>
@@ -35,7 +35,6 @@
                 </table>
             </div>
         </div>
-        <a href="/tags/shoft_deleted" target="_blank">Soft Deleted tags</a>
     </div>
 <div>
 @endsection

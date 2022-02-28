@@ -38,3 +38,12 @@ Route::get('tags/edit/{id}','TagController@edit');
 Route::put('tags/update/{id}','TagController@update');
 Route::get('tags/delete/{id}','TagController@destroy');
 Route::get('tags/show/{id}','TagController@show');
+Route::get('tags/shoft_deleted','TagController@shoft_deleted_tags');
+Route::get('tags/restore/{id}','TagController@restore_tag');
+
+
+//blog routes
+
+Route::get('blog/create','BlogController@create')->name('b_create');
+Route::post('blog/store','BlogController@store')->name('b_store');
+Route::get('blog.index','BlogController@index')->name('b_index');

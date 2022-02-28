@@ -9,4 +9,8 @@ class Category extends Model
 {
     //
     use SoftDeletes;
+    public function blogs()
+    {
+        return $this->hasMany('App\Blog');
+    }
 }

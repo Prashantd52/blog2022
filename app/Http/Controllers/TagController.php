@@ -62,7 +62,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag,$id)
     {
-        $tag=Tag::find($id);
+        $tag=Tag::withTrashed()->find($id);
         return view('Tag.tag_show',Compact('tag'));
     }
 
@@ -114,11 +114,36 @@ class TagController extends Controller
     public function destroy(Tag $tag,$id)
     {
         //
-        $tag=Tag::where('id',$id)->first();
+        $tag=Tag::withTrashed()->where('id',$id)->first();
 
-        $tag->delete();
+        if($tag->deleted_at)
+        {
+            $tag->forceDelete();        //permanent delete
+            session()->flash('danger','Tag deleted Permanently');
+        }
+        else
+        {
+            $tag->delete();     //soft delete
+            session()->flash('danger','Tag deleted succesfully');
+        }
 
-        session()->flash('danger','Tag deleted succesfully');
         return redirect()->back();
+    }
+
+    public function shoft_deleted_tags()
+    {
+        $tags=Tag::onlyTrashed()->get();
+
+        return view('Tag.soft_deleted',compact('tags'));
+    }
+
+    public function restore_tag($id)
+    {
+        $tag=Tag::withTrashed()->where('id',$id)->first();
+
+        $tag->restore();
+
+        session()->flash('warning','Tag restored successfully!');
+        return redirect('tags/index');
     }
 }
