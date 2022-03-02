@@ -11,7 +11,7 @@
                             <th>Id</th>
                             <th>Name</th>
                             <th>Decription</th>
-                            <th>Created at</th>
+                            <th>Blogs</th>
                             <th>action</th>
                         </tr>
                     </thead>
@@ -21,7 +21,11 @@
                             <td>{{$tag->id}}</td>
                             <td>{{$tag->name}}</td>
                             <td>{{$tag->description}}</td>
-                            <td>{{$tag->created_at}}</td>
+                            <td>
+                                @foreach($tag->blogs as $blog)
+                                <span class="badge badge-success">{{$blog->name}}</span>
+                                @endforeach
+                            </td>
                             <td>
                                 <div class="row ml-1">
                                     <a class="btn btn-primary" href="/tags/edit/{{$tag->id}}" target="blank" title="edit tag">Edit</a>&emsp;

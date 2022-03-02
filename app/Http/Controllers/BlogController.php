@@ -45,13 +45,19 @@ class BlogController extends Controller
     {
         //
         //dd($request);
+        $request->validate([
+            'name'=>'required|unique:blogs,name|min:5',
+            'category'=>'required',
+            'content'=>'required',
+        ]);
         $blog= new Blog;
         $blog->name=$request->name;
         $blog->content=$request->content;
         $blog->category_id=$request->category;
 
         $blog->save();
-
+        
+        $blog->tags()->sync($request->tags);
         session()->flash('success','Blog Created Succesfully');
         return redirect()->route('b_index');
     }

@@ -23,6 +23,7 @@
         <div class="card-body">
             <a  class="col-md-2 btn btn-info" href="/categories/index" target="blank" title="all categories">Categories</a> 
             <a  class="col-md-2 btn btn-primary" href="/tags/index" target="blank" title="all tags">Tags</a>
+            <a  class="col-md-2 btn btn-success" href="{{route('b_index')}}" target="blank" title="all tags">Blogs</a>
         </div>
     </div>
 </div>

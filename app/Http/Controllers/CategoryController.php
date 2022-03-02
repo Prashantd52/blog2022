@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Blog;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -64,7 +65,7 @@ class CategoryController extends Controller
     public function show(Category $category,$id)
     {
         //
-        $category=Category::where('id',$id)->first();
+        $category=Category::withTrashed()->where('id',$id)->first();
 
         return view('Category.category_show',compact('category'));
     }
@@ -115,10 +116,27 @@ class CategoryController extends Controller
     public function destroy(Category $category,$id)
     {
         //
-        $category=Category::find($id);
-        $category->delete();
+        $category=Category::withTrashed()->find($id);
 
-        session()->flash('danger','Category Deleted Successfully!');
+        $blog=Blog::where('category_id',$id)->first();
+
+        if($blog)   //if(Count($category->blogs)!=0)
+        {
+            session()->flash("danger","Category can't  be Deleted");
+        }
+        else
+        {
+            if($category->deleted_at)
+            {
+                $category->forceDelete();
+                session()->flash('danger','Category Deleted Permanently!');
+            }
+            else
+            {
+                $category->delete();    
+                session()->flash('danger','Category Deleted Successfully!');
+            }
+        }
         return redirect('categories/index');
     }
 

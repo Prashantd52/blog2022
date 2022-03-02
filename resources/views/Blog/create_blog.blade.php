@@ -20,21 +20,21 @@
                     <br><br>
                     <div class="row">
                         <label>Choose Categories</label>&emsp;
-                        <select class="form-select col-5" name="category"  aria-label="Default select example">
+                        <select class=" js-example-basic-single form-select col-5" name="category"  aria-label="Default select example">
                             <option selected disabled>---select category---</option>  
                             @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>  
                             @endforeach
                         </select>             
-                    </div>
                         @error('category')
-                            <span class='text-danger'>{{$message}}</span>
+                        <span class='text-danger'>{{$message}}</span>
                         @enderror 
+                    </div>
                         <br>
                     <div class="row">
                         <label>Choose Tags</label>&emsp;&emsp;&emsp;&emsp;
-                        <select class=" form-select col-5" name="tags"  aria-label="Default select example">
-                            <option selected disabled>---select tags---</option>
+                        <select class="js-example-basic-multiple form-select col-5" name="tags[]" multiple="multiple"   aria-label="Default select example">
+                            <option disabled>---select tags---</option>
                             @foreach($tags as $tag)
                             <option value="{{$tag->id}}">{{$tag->name}}</option>  
                             @endforeach
@@ -46,6 +46,9 @@
                     <div class="row">
                         <label>Content</label>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                         <textarea class="form-group col-md-5" name="content" placeholder="write content here"></textarea>
+                        @error('content')
+                            <span class='text-danger'>{{$message}}</span>
+                        @enderror
                     </div>
                 </div>
                 <button class="btn btn-success" type="submit">Create</button>

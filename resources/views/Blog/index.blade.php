@@ -21,6 +21,7 @@
                             <th>Name</th>
                             <th>Decription</th>
                             <th>Category</th>
+                            <th>Tags</th>
                             <th>action</th>
                         </tr>
                     </thead>
@@ -31,6 +32,11 @@
                             <td>{{$blog->name}}</td>
                             <td>{{$blog->content}}</td>
                             <td>{{$blog->category->name}}</td>
+                            <td>
+                                @foreach($blog->tags as $tag)
+                                <span class="badge badge-warning">{{$tag->name}}</span>
+                                @endforeach
+                            </td>
                             <td>
                                 {{--<div class="row ml-1">
                                     @if(Auth::user())
