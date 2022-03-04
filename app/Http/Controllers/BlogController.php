@@ -81,7 +81,10 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        //dd($blog);
+        $categories=Category::all();
+        $tags=Tag::all();
+        return view('Blog.edit',Compact('blog','categories','tags'));
     }
 
     /**
@@ -94,6 +97,24 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog)
     {
         //
+        $request->validate([
+
+            'name'=>'required|unique:blogs,name,'.$blog->id.'|min:5',
+            'category'=>'required',
+            'tags'=>'required',
+            'content'=>'required',
+        ]);
+
+        $blog->name = $request->name;
+        $blog->category_id = $request->category;
+        $blog->content = $request->content;
+
+        $blog->save();
+        $blog->tags()->sync($request->tags);
+
+        session()->flash('success','Blog updated successfully');
+
+        return redirect()->route('b_index');
     }
 
     /**
@@ -105,5 +126,6 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
+        echo "under development";
     }
 }

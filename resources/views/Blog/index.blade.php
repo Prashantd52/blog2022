@@ -38,17 +38,15 @@
                                 @endforeach
                             </td>
                             <td>
-                                {{--<div class="row ml-1">
-                                    @if(Auth::user())
-                                    <a class="btn btn-primary" href="/categories/edit/{{$blog->id}}" target="blank" title="edit category">Edit</a>&emsp;
+                                <div class="row ml-1">
+                                    <a class="btn btn-primary" href="/blog/edit/{{$blog->id}}" target="blank" title="edit blog">Edit</a>&emsp;
                                     <form action="/categories/delete/{{$blog->id}}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger" title="Delete category">Delete</button>&emsp;
+                                        <button type="submit" class="btn btn-danger" title="Delete blog">Delete</button>&emsp;
                                     </form>
-                                    @endif
-                                    <a class="btn btn-info" href="/categories/show/{{$blog->id}}" target="blank" title="view category" >View</a>&emsp;
-                                </div>--}}
+                                    <a class="btn btn-info" href="/blog/show/{{$blog->id}}" target="blank" title="view blog" >View</a>&emsp;
+                                </div>
                             </td>
                         </tr>
                         @endforeach

@@ -47,3 +47,6 @@ Route::get('tags/restore/{id}','TagController@restore_tag');
 Route::get('blog/create','BlogController@create')->name('b_create');
 Route::post('blog/store','BlogController@store')->name('b_store');
 Route::get('blog/index','BlogController@index')->name('b_index');
+Route::get('blog/edit/{blog}','BlogController@edit')->name('b_edit');
+Route::put('blog/update/{blog}','BlogController@update')->name('b_update');
+Route::delete('blog/delete','BlogController@destroy')->name('b_delete');
