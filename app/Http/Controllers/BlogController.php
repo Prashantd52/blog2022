@@ -14,12 +14,13 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $blogs=Blog::get();
-        //dd($blogs);
-        return view('Blog.index',Compact('blogs'));
+        //dd($request);
+        $search=$request->searchBN ?$request->searchBN : '';
+        $blogs=Blog::search('name',$search)->get();
+        
+        return view('Blog.index',Compact('blogs','search'));
     }
 
     /**
@@ -68,9 +69,12 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show(Blog $blog,$id)
     {
         //
+        $blog=Blog::where('id',$id)->withTrashed()->first();
+
+        return view('Blog.show',compact('blog'));
     }
 
     /**
@@ -123,9 +127,41 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Request $request,Blog $blog)
     {
-        //
-        echo "under development";
+        //dd($request);
+        //echo "under development";
+        $blog=Blog::withTrashed()->find($request->blog_id);
+
+        //dd($blog);
+        if($blog->deleted_at)
+        {
+            $blog->forceDelete();
+            session()->flash('danger','Blog Deleted Permanently');
+        }
+        else
+        {
+            $blog->delete();
+            session()->flash('danger','Blog Deleted Successfully');
+        }
+        return redirect()->back();
+
+    }
+
+    public function soft_deleted_blogs(Request $request)
+    {
+        $search=$request->searchBN ?$request->searchBN : '';
+        $blogs=Blog::search('name',$search)->onlyTrashed()->get();
+        $type="soft_deleted";
+
+        return view('Blog.index',compact('blogs','type','search'));
+    }
+
+    public function restore_blog($id)
+    {
+        $blog=Blog::onlyTrashed()->where('id',$id);
+        $blog->restore();
+
+        return redirect()->route('b_index');
     }
 }

@@ -6,7 +6,7 @@
         <div class="col"></div>
         <div class="col-md-4">
             <form class="pt-1" action="" method="get">
-                    <input type="text" placeholder="search Category" name="searchCN" value="">&nbsp;
+                    <input type="text" placeholder="search Category" name="searchBN" value="{{$search}}">&nbsp;
                     <button type="submit" class="btn btn-outline-info">Go</button>
             </form>
         </div>
@@ -39,10 +39,15 @@
                             </td>
                             <td>
                                 <div class="row ml-1">
-                                    <a class="btn btn-primary" href="/blog/edit/{{$blog->id}}" target="blank" title="edit blog">Edit</a>&emsp;
-                                    <form action="/categories/delete/{{$blog->id}}" method="post">
+                                    @if($blog->deleted_at)
+                                        <a class="btn btn-warning" href="{{route('b_restore',$blog->id)}}" title="restore blog">Restore</a>&emsp;
+                                    @else
+                                        <a class="btn btn-primary" href="/blog/edit/{{$blog->id}}" target="blank" title="edit blog">Edit</a>&emsp;
+                                    @endif
+                                    <form action="{{route('b_delete')}}" method="post">
                                         @csrf
                                         @method('delete')
+                                        <input type="hidden" value="{{$blog->id}}" name="blog_id">
                                         <button type="submit" class="btn btn-danger" title="Delete blog">Delete</button>&emsp;
                                     </form>
                                     <a class="btn btn-info" href="/blog/show/{{$blog->id}}" target="blank" title="view blog" >View</a>&emsp;
@@ -54,7 +59,9 @@
                 </table>
             </div>
         </div>
-        <!-- <a href="/categories/shoft_deleted" target="_blank">view deleted categories</a> -->
+        @if(! ($type??''))
+            <a href="{{route('b_sod')}}" target="_blank">view deleted blogs</a>
+        @endif
     </div>
 <div>
 @endsection

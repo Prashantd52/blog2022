@@ -50,3 +50,6 @@ Route::get('blog/index','BlogController@index')->name('b_index');
 Route::get('blog/edit/{blog}','BlogController@edit')->name('b_edit');
 Route::put('blog/update/{blog}','BlogController@update')->name('b_update');
 Route::delete('blog/delete','BlogController@destroy')->name('b_delete');
+Route::get('blog/soft_deleted','BlogController@soft_deleted_blogs')->name('b_sod');
+Route::get('blog/restore/{id}','BlogController@restore_blog')->name('b_restore');
+Route::get('blog/show/{id}','BlogController@show')->name('b_show');
