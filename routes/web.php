@@ -53,3 +53,4 @@ Route::delete('blog/delete','BlogController@destroy')->name('b_delete');
 Route::get('blog/soft_deleted','BlogController@soft_deleted_blogs')->name('b_sod');
 Route::get('blog/restore/{id}','BlogController@restore_blog')->name('b_restore');
 Route::get('blog/show/{id}','BlogController@show')->name('b_show');
+Route::get('blog/delete_image/{id}','BlogController@delete_image')->name('b_d_image');

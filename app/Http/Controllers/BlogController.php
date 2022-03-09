@@ -56,6 +56,7 @@ class BlogController extends Controller
         $blog->content=$request->content;
         $blog->category_id=$request->category;
 
+        $blog->file_path=$this->add_media($request->file('image'));
         $blog->save();
         
         $blog->tags()->sync($request->tags);
@@ -113,6 +114,11 @@ class BlogController extends Controller
         $blog->category_id = $request->category;
         $blog->content = $request->content;
 
+        if($request->file('image'))
+        {
+            $result=$this->delete_image($blog->id);
+            $blog->file_path=$this->add_media($request->file('image'));
+        }
         $blog->save();
         $blog->tags()->sync($request->tags);
 
@@ -163,5 +169,30 @@ class BlogController extends Controller
         $blog->restore();
 
         return redirect()->route('b_index');
+    }
+
+    public function add_media($file)
+    {
+        $tempName=time();
+        $extension=$file->getClientOriginalExtension();
+        $fileName=$tempName.'.'.$extension;
+        // $path = $file->storeAs('public/Blog',$fileName);
+        //$path = $file->move(base_path('Blog'),$fileName);
+        //$path = $file->move(public_path('Blog'),$fileName);
+        $path = $file->move('Blog',$fileName);
+        return $path;
+    }
+
+    public function delete_image($id)
+    {
+        $blog=Blog::findOrFail($id);
+
+        $filename = public_path($blog->file_path);
+        unlink($filename);
+
+        $blog->file_path="";
+        $blog->save();
+
+        return redirect()->back();
     }
 }

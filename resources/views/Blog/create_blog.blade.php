@@ -6,7 +6,7 @@
     <div class="card">
         <h3 class="m-2">New Blog</h3>
         <div class="card-body">
-            <form action="{{route('b_store')}}" method="post">
+            <form action="{{route('b_store')}}" method="post" enctype="multipart/form-data">
                 @csrf()
                 @method('post')
                 <div class="card-body">
@@ -49,6 +49,10 @@
                         @error('content')
                             <span class='text-danger'>{{$message}}</span>
                         @enderror
+                    </div>
+                    <div class="row">
+                        <label>Add Image</label>&emsp;&emsp;&emsp;&emsp;
+                        <input type="file" name="image" >
                     </div>
                 </div>
                 <button class="btn btn-success" type="submit">Create</button>
