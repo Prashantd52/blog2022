@@ -1,10 +1,7 @@
-@extends('layouts.app')
-
-@section('content')
 
 <div class="container">
     <div class="card">
-        <h3 class="m-2">Show Blog</h3>
+        {{--<h3 class="m-2">Show Blog</h3>--}}
         <div class="card-body"> 
             <div class="card-body row">
                 <div class="col-8">
@@ -36,4 +33,3 @@
         </div>
     </div>
 </div>
-@endsection

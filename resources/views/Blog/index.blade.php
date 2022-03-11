@@ -6,7 +6,7 @@
         <div class="col"></div>
         <div class="col-md-4">
             <form class="pt-1" action="" method="get">
-                    <input type="text" placeholder="search Category" name="searchBN" value="{{$search}}">&nbsp;
+                    <input type="text" placeholder="Search Blog" name="searchBN" value="{{$search}}">&nbsp;
                     <button type="submit" class="btn btn-outline-info">Go</button>
             </form>
         </div>
@@ -27,7 +27,7 @@
                     </thead>
                     <tbody>
                         @foreach($blogs as $blog)
-                        <tr>
+                        <tr id="blog{{$blog->id}}">
                             <td>{{$blog->id}}</td>
                             <td>{{$blog->name}}</td>
                             <td>{{$blog->content}}</td>
@@ -50,7 +50,7 @@
                                         <input type="hidden" value="{{$blog->id}}" name="blog_id">
                                         <button type="submit" class="btn btn-danger" title="Delete blog">Delete</button>&emsp;
                                     </form>
-                                    <a class="btn btn-info" href="/blog/show/{{$blog->id}}" target="blank" title="view blog" >View</a>&emsp;
+                                    <a class="btn btn-info" href="#" target="blank" title="view blog" data-toggle="modal" data-target="#exampleModal"  onclick="viewblog('{{$blog->slug}}')">View</a>&emsp;
                                 </div>
                             </td>
                         </tr>
@@ -58,10 +58,51 @@
                     </tbody>
                 </table>
             </div>
+            {{$blogs->links()}}
         </div>
         @if(! ($type??''))
             <a href="{{route('b_sod')}}" target="_blank">view deleted blogs</a>
         @endif
     </div>
 <div>
+
+<!-- Scrollable modal -->
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">View Blog</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="blog_data">
+        
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<script>
+    function viewblog(slug)
+    {
+        //alert(slug);
+
+        $.ajax({
+            type:'get',
+            url:'/blog/show/'+slug,
+            success: function(response)
+            {
+                $("#blog_data").html(response);
+            },
+            error: function(response)
+            {
+                alert("error occured");
+            }
+        });
+    }
+</script>
 @endsection

@@ -70,7 +70,7 @@
                         @endif
                     </div>
                 </div>
-                <button class="btn btn-success" type="submit">Create</button>
+                <button class="btn btn-success" type="submit">Update</button>
             </form>
         </div>
     </div>

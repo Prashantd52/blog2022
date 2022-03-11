@@ -6,6 +6,7 @@ use App\Blog;
 use App\Category;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -18,7 +19,8 @@ class BlogController extends Controller
     {
         //dd($request);
         $search=$request->searchBN ?$request->searchBN : '';
-        $blogs=Blog::search('name',$search)->get();
+        // $blogs=Blog::search('name',$search)->get();
+        $blogs=Blog::search('name',$search)->paginate(10);
         
         return view('Blog.index',Compact('blogs','search'));
     }
@@ -57,6 +59,10 @@ class BlogController extends Controller
         $blog->category_id=$request->category;
 
         $blog->file_path=$this->add_media($request->file('image'));
+        $slug=str_replace(' ','$',strtolower($request->name));
+        $random=Str::random(5);
+        
+        $blog->slug=$slug.$random;
         $blog->save();
         
         $blog->tags()->sync($request->tags);
@@ -70,12 +76,17 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog,$id)
+    public function show($slug)
     {
         //
-        $blog=Blog::where('id',$id)->withTrashed()->first();
-
-        return view('Blog.show',compact('blog'));
+        $blog=Blog::where('slug',$slug)->withTrashed()->first();
+        if($blog)
+            return view('Blog.show',compact('blog'));
+        else
+        {
+            session()->flash('warning','Blog not found');
+            return redirect()->route('b_index');
+        }
     }
 
     /**
@@ -119,6 +130,10 @@ class BlogController extends Controller
             $result=$this->delete_image($blog->id);
             $blog->file_path=$this->add_media($request->file('image'));
         }
+        $slug=str_replace(' ','$',strtolower($request->name));
+        $random=Str::random(5);
+        $blog->slug=$slug.$random;
+
         $blog->save();
         $blog->tags()->sync($request->tags);
 
@@ -157,7 +172,7 @@ class BlogController extends Controller
     public function soft_deleted_blogs(Request $request)
     {
         $search=$request->searchBN ?$request->searchBN : '';
-        $blogs=Blog::search('name',$search)->onlyTrashed()->get();
+        $blogs=Blog::search('name',$search)->onlyTrashed()->paginate(10);
         $type="soft_deleted";
 
         return view('Blog.index',compact('blogs','type','search'));

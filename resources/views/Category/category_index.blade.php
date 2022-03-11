@@ -6,7 +6,7 @@
         <div class="col"></div>
         <div class="col-md-4">
             <form class="pt-1" action="" method="get">
-                    <input type="text" placeholder="search Category" name="searchCN" value="">&nbsp;
+                    <input type="text" placeholder="Search Category" name="searchCN" value="">&nbsp;
                     <button type="submit" class="btn btn-outline-info">Go</button>
             </form>
         </div>
