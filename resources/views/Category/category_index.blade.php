@@ -11,6 +11,7 @@
             </form>
         </div>
     </div>
+    <div id="data"></div>
     <div class="card">
         <div class="card-body">
             <div class="table ">
@@ -45,7 +46,7 @@
                                         <button type="submit" class="btn btn-danger" title="Delete category">Delete</button>&emsp;
                                     </form>
                                     @endif
-                                    <a class="btn btn-info" href="/categories/show/{{$category->id}}" target="blank" title="view category" >View</a>&emsp;
+                                    <a class="btn btn-info" href="#"  onclick="showcategory({{$category->id}})" title="view category" >View</a>&emsp;
                                 </div>
                             </td>
                         </tr>
@@ -57,4 +58,23 @@
         <a href="/categories/shoft_deleted" target="_blank">view deleted categories</a>
     </div>
 <div>
+
+<script>
+    function showcategory(id)
+    {
+        $.ajax({
+           type:'get' ,
+           url:"/categories/show/"+id,
+           data:{},     //when we send data in request
+           success: function(response)
+           {
+                $("#data").html(response);
+           },
+           error: function(response)
+           {
+               alert('error occured');
+           }
+        });
+    }
+</script>
 @endsection

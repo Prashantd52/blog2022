@@ -54,3 +54,9 @@ Route::get('blog/soft_deleted','BlogController@soft_deleted_blogs')->name('b_sod
 Route::get('blog/restore/{id}','BlogController@restore_blog')->name('b_restore');
 Route::get('blog/show/{slug}','BlogController@show')->name('b_show');
 Route::get('blog/delete_image/{id}','BlogController@delete_image')->name('b_d_image');
+
+
+//comment routes
+Route::get('comment/create/{blogid}','CommentController@create')->name('c_comment');
+Route::post('comment/store','CommentController@store')->name('s_comment');
+Route::get('comment/index','CommentController@index')->name('i_comment');

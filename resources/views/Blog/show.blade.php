@@ -1,4 +1,5 @@
-
+@extends('layouts.app')
+@section('content')
 <div class="container">
     <div class="card">
         {{--<h3 class="m-2">Show Blog</h3>--}}
@@ -31,5 +32,7 @@
                 </div>
             </div>
         </div>
+        <a class="btn btn-success col-md-3" href="{{route('c_comment',$blog->id)}}" target="_blank" title="add comment">Comment</a>
     </div>
 </div>
+@endsection

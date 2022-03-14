@@ -50,7 +50,7 @@
                                         <input type="hidden" value="{{$blog->id}}" name="blog_id">
                                         <button type="submit" class="btn btn-danger" title="Delete blog">Delete</button>&emsp;
                                     </form>
-                                    <a class="btn btn-info" href="#" target="blank" title="view blog" data-toggle="modal" data-target="#exampleModal"  onclick="viewblog('{{$blog->slug}}')">View</a>&emsp;
+                                    <a class="btn btn-info" href="{{route('b_show',$blog->slug)}}" target="_blank" title="view blog" {{--data-toggle="modal" data-target="#exampleModal"  onclick="viewblog('{{$blog->slug}}')"--}}>View</a>&emsp;
                                 </div>
                             </td>
                         </tr>
