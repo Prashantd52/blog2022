@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h3>Category List<span><a href="/categories/create" target="_blank" title="create category">+</a></span></h3>
+    <h3>Category List<span><a href="#" onclick="creatCategory()" title="create category">+</a></span></h3>
     <div class="row">
         <div class="col"></div>
         <div class="col-md-4">
@@ -75,6 +75,23 @@
                alert('error occured');
            }
         });
+    }
+
+    function creatCategory()
+    {
+        $.ajax({
+            type:'get',
+            url:'/categories/create',
+            success: function(response)
+            {
+                $("#data").html(response);
+                // alert('success');
+            },
+            error: function(response)
+            {
+                alert("some error occured");
+            }
+        })
     }
 </script>
 @endsection
