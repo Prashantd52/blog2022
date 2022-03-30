@@ -24,6 +24,7 @@
             <a  class="col-md-2 btn btn-info" href="/categories/index" target="blank" title="all categories">Categories</a> 
             <a  class="col-md-2 btn btn-primary" href="/tags/index" target="blank" title="all tags">Tags</a>
             <a  class="col-md-2 btn btn-success" href="{{route('b_index')}}" target="blank" title="all tags">Blogs</a>
+            <a  class="col-md-2 btn btn-secondary" href="{{route('i_comment')}}" target="blank" title="all tags">Comments</a>
         </div>
     </div>
 </div>

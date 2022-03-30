@@ -16,15 +16,17 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        $comment= new Comment;
-        //dd($comment);
-        $comment->comment=$request->comment;
-        $comment->blog_id=$request->Blog_Id;
-        $comment->user_id=Auth::id();
-        //dd($comment);
-        $comment->save();
+        $newComment= new Comment;
+        
+        $newComment->comment=$request->comment;
+        $newComment->blog_id=$request->Blog_Id;
+        $newComment->user_id=Auth::id();
+        //dd($newComment);
+        $newComment->save();
 
-        return redirect()->route('b_index');
+        return ['status'=>'success','data'=>$newComment];
+
+        //return redirect()->route('b_index');
     }
 
     public function index()
