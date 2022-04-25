@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('categeory_index','Api\CategoryController@index');
+Route::post('category_show','Api\CategoryController@show');
+Route::post('category_store','Api\CategoryController@store');
