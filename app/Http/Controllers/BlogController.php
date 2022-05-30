@@ -7,6 +7,7 @@ use App\Category;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Auth;
 
 class BlogController extends Controller
 {
@@ -79,9 +80,11 @@ class BlogController extends Controller
     public function show($slug)
     {
         //
+        $user_id=Auth::id();
+        //dd($user_id);
         $blog=Blog::where('slug',$slug)->withTrashed()->first();
         if($blog)
-            return view('Blog.show',compact('blog'));
+            return view('Blog.show',compact('blog','user_id'));
         else
         {
             session()->flash('warning','Blog not found');

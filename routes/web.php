@@ -58,5 +58,5 @@ Route::get('blog/delete_image/{id}','BlogController@delete_image')->name('b_d_im
 
 //comment routes
 Route::get('comment/create/{blogid}','CommentController@create')->name('c_comment');
-Route::post('comment/store','CommentController@store')->name('s_comment');
-Route::get('comment/index','CommentController@index')->name('i_comment');
+// Route::post('comment/store','CommentController@store')->name('s_comment');
+// Route::get('comment/index','CommentController@index')->name('i_comment');

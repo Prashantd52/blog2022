@@ -32,7 +32,81 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-success col-md-3" href="{{route('c_comment',$blog->id)}}" target="_blank" title="add comment">Comment</a>
+        <a class="btn btn-success col-md-3" href="#" {{--target="_blank"--}} title="add comment" data-toggle="modal" data-target="#exampleModal" onclick="create_comment({{$blog->id}},'{{$blog->name}}')">Comment</a>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ADD Comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal_body">
+        hjdgsfjhdbvjfbnmvbfdjgjykergjnmv zxm
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<script>
+function create_comment(blogId,name)
+{
+    // alert("hello");
+    $.ajax({
+        type: 'get',
+        url: '/comment/create/'+blogId,
+        // data:{
+
+        // },
+        success: function(response)
+        {
+            console.log(response);
+            $("#modal_body").html(response);
+            $("#exampleModalLabel").html(name);
+        },
+        error: function(response)
+        {
+            console.log(response);
+            alert("some_error_occured");
+        }
+
+    });
+}  
+
+function comment_save()
+{
+    var blog_id=$("#blog_id").val();
+    var blogComment=$("#blog_comment").val();
+    // var userId="{{$user_id ?? ''}}";
+
+    // alert(blog_id,blogComment);
+    $.ajax({
+        type:'post',
+        url:'/api/add_comment',
+        data:{
+            comment: 'hello',
+            blogId: '2',
+            userId: 1,
+        },
+        success: function(response)
+        {
+            alert('Comment added');
+        },
+        error: function(response)
+        {
+            allert('some error occured');
+        }
+    })
+
+}
+</script>
 @endsection
+

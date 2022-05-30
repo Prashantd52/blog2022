@@ -20,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('categeory_index','Api\CategoryController@index');
 Route::post('category_show','Api\CategoryController@show');
 Route::post('category_store','Api\CategoryController@store');
+
+
+//comments route
+
+Route::post('add_comment','Api\CommentController@create');
