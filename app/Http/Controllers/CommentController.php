@@ -11,7 +11,8 @@ class CommentController extends Controller
     //
     public function create($blogId)
     {
-        return view('Comment.create',compact('blogId'));
+        $user_id=Auth::id();
+        return view('Comment.create',compact('blogId','user_id'));
     }
 
     public function store(Request $request)

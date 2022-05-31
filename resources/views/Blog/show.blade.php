@@ -33,6 +33,14 @@
             </div>
         </div>
         <a class="btn btn-success col-md-3" href="#" {{--target="_blank"--}} title="add comment" data-toggle="modal" data-target="#exampleModal" onclick="create_comment({{$blog->id}},'{{$blog->name}}')">Comment</a>
+        <div >
+            <ul id="comment_list">
+                @foreach($blog->comments as $tempcomment)
+                    <li>{{$tempcomment->comment}}</li>
+                @endforeach
+
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -46,7 +54,7 @@
         </button>
       </div>
       <div class="modal-body" id="modal_body">
-        hjdgsfjhdbvjfbnmvbfdjgjykergjnmv zxm
+        ADD COMMENT
       </div>
       <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -81,32 +89,7 @@ function create_comment(blogId,name)
     });
 }  
 
-function comment_save()
-{
-    var blog_id=$("#blog_id").val();
-    var blogComment=$("#blog_comment").val();
-    // var userId="{{$user_id ?? ''}}";
 
-    // alert(blog_id,blogComment);
-    $.ajax({
-        type:'post',
-        url:'/api/add_comment',
-        data:{
-            comment: 'hello',
-            blogId: '2',
-            userId: 1,
-        },
-        success: function(response)
-        {
-            alert('Comment added');
-        },
-        error: function(response)
-        {
-            allert('some error occured');
-        }
-    })
-
-}
 </script>
 @endsection
 

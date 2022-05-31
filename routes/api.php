@@ -24,4 +24,4 @@ Route::post('category_store','Api\CategoryController@store');
 
 //comments route
 
-Route::post('add_comment','Api\CommentController@create');
+Route::post('save_comment','Api\CommentController@store_comment');

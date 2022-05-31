@@ -10,12 +10,10 @@ class CommentController extends Controller
 {
     //
 
-    public function create(Request $request)
+    public function store_comment(Request $request)
     {
-        // $request->validate([
-        //     'comment'=>'required',
-        //     'blogId'=>'required',
-        // ]);
+
+        $request->commen;
         if(!$request->comment)
         {
             return ['status'=>'error','message'=>'comment field is empty'];
