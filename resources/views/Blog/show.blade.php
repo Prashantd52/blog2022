@@ -36,7 +36,7 @@
         <div >
             <ul id="comment_list">
                 @foreach($blog->comments as $tempcomment)
-                    <li>{{$tempcomment->comment}}</li>
+                    <li>{{$tempcomment->comment}}<a href="#" ></a></li>
                 @endforeach
 
             </ul>

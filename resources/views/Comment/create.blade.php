@@ -19,7 +19,7 @@ function comment_save()
         type:'post',
         url:'/api/save_comment',
         data:{
-            _token: "{{csrf_token}}",
+            _token: "{{csrf_token()}}",
             comment: blogComment,
             blogId: blog_id,
             userId: userId,
